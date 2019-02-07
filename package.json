@@ -1,0 +1,29 @@
+{
+  "name": "phina-logger",
+  "version": "0.1.0",
+  "description": "Provides logging utils for phina.js",
+  "main": "src/index.js",
+  "files": [
+    "./src",
+    "./dist"
+  ],
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack -w",
+    "build": "cross-env NODE_ENV=production webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "phina.js"
+  ],
+  "author": "pentamania",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "5.2.0",
+    "webpack": "4.26.1",
+    "webpack-cli": "3.1.2"
+  },
+  "peerDependencies": {
+    "phina.js": "^0.2.2"
+  }
+}

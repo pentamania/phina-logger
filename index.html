@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="author" content="pentamania">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>phina-debugger example</title>
+  <script src='https://cdn.jsdelivr.net/npm/phina.js@0.2.2/build/phina.min.js'></script>
+  <!-- <script src="https://cdn.jsdelivr.net/gh/pentamania/phina.js@slim/build/phina.min.js"></script> -->
+  <script src="dist/phina-logger.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+  phina.globalize();
+  phina.main(function () {
+    var app = phina.game.GameApp({
+      startLabel: 'main',
+      backgroundColor: "skyblue",
+    });
+
+    app.run();
+  });
+
+  phina.define('MainScene', {
+    superClass: 'phina.display.DisplayScene',
+
+    init: function (options) {
+      this.superInit(options);
+      var gx = this.gridX;
+      var gy = this.gridY;
+
+      this.logLabelArea = phina.display.LogLabelArea({
+        text: "タップした点の座標が表示されるよ",
+        maxLog: 18,
+        dragScroll: true,
+        fontSize: 22,
+        // width: this.width - 10,
+        // height: this.height * 0.4,
+        width: this.width * 0.75,
+        height: this.height * 0.75,
+      })
+        .addChildTo(this)
+        .setPosition(gx.center(), gy.center())
+        // .setOrigin(0.5, 1)
+        // .setPosition(gx.center(), this.height)
+        // .setDragScroll(10)
+      ;
+    },
+
+    update: function (app) {
+      var p = app.pointer;
+      var kb = app.keyboard;
+      var logArea = this.logLabelArea;
+
+      if (p.getPointingStart()) {
+        Wave()
+          .setPosition(p.x, p.y)
+          .addChildTo(this);
+        logArea.add(
+          { px: p.x.toFixed(4), py: p.y.toFixed(4) }
+        );
+      }
+      if (kb.getKey('space')) {
+        logArea.add('space pressed');
+      }
+    },
+
+  });
+</script>
+</body>
+</html>
